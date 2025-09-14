@@ -1,0 +1,124 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /middleware-analyze
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/middleware_analyze?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root123
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 900000
+      connection-test-query: SELECT 1
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+
+  profiles:
+    active: dev
+
+logging:
+  level:
+    com.wind.middleware: DEBUG
+    org.springframework: INFO
+    org.elasticsearch: INFO
+    org.apache.http: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/middleware-analyze.log
+  logback:
+    rollingpolicy:
+      max-file-size: 100MB
+      max-history: 30
+      total-size-cap: 3GB
+
+# MyBatis-Plus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+# 自定义配置
+middleware:
+  # Elasticsearch配置
+  elasticsearch:
+    hosts: localhost:9200
+    connection-timeout: 5000
+    socket-timeout: 10000
+    retry-count: 3
+    index-prefix: sflow-
+
+  # 外部API配置
+  external-api:
+    machine-list-url: http://api.example.com/machines
+    service-info-url: http://api.example.com/services
+    connection-timeout: 3000
+    read-timeout: 5000
+    retry-count: 2
+
+  # 任务配置
+  task:
+    max-query-days: 30
+    queue-capacity: 1000
+    default-page-size: 10
+    max-page-size: 100
+
+# SpringDoc OpenAPI 3 配置
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+    displayRequestDuration: true
+  show-actuator: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/middleware_analyze?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root123
+logging:
+  level:
+    com.wind.middleware: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://prod-mysql:3306/middleware_analyze?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:middleware}
+    password: ${DB_PASSWORD:middleware123}
+middleware:
+  elasticsearch:
+    hosts: ${ES_HOSTS:prod-es:9200}
+  external-api:
+    machine-list-url: ${MACHINE_API_URL:http://api.internal.com/machines}
+    service-info-url: ${SERVICE_API_URL:http://api.internal.com/services}
+logging:
+  level:
+    com.wind.middleware: INFO

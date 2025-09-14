@@ -1,0 +1,140 @@
+2025-09-14 17:04:00.704 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Starting MiddlewareAnalyzeApplication using Java 17 with PID 91727 (/Users/hqhe/IdeaProjects/middle-ware-analyze/target/classes started by hqhe in /Users/hqhe/IdeaProjects/middle-ware-analyze)
+2025-09-14 17:04:00.705 [main] DEBUG c.w.m.MiddlewareAnalyzeApplication - Running with Spring Boot v3.3.6, Spring v6.1.15
+2025-09-14 17:04:00.705 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - The following 1 profile is active: "dev"
+2025-09-14 17:04:01.066 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-14 17:04:01.071 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-14 17:04:01.071 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-09-14 17:04:01.088 [main] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring embedded WebApplicationContext
+2025-09-14 17:04:01.088 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 368 ms
+2025-09-14 17:04:01.229 [main] INFO  c.w.m.config.TaskQueueConfig - 任务队列初始化完成，容量: 1000
+2025-09-14 17:04:01.229 [main] INFO  c.w.m.config.TaskQueueConfig - 任务处理线程池初始化完成
+2025-09-14 17:04:01.230 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'taskController': Unsatisfied dependency expressed through field 'taskService': Error creating bean with name 'taskService': Unsatisfied dependency expressed through field 'taskQueueManager': Error creating bean with name 'taskQueueManager': Unsatisfied dependency expressed through field 'taskProcessor': Error creating bean with name 'taskProcessor': Unsatisfied dependency expressed through field 'taskService': Error creating bean with name 'taskService': Requested bean is currently in creation: Is there an unresolvable circular reference?
+2025-09-14 17:04:01.231 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-09-14 17:04:01.236 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-14 17:04:01.243 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   taskController (field private com.wind.middleware.service.TaskService com.wind.middleware.controller.TaskController.taskService)
+┌─────┐
+|  taskService (field private com.wind.middleware.queue.TaskQueueManager com.wind.middleware.service.TaskService.taskQueueManager)
+↑     ↓
+|  taskQueueManager (field private com.wind.middleware.queue.TaskProcessor com.wind.middleware.queue.TaskQueueManager.taskProcessor)
+↑     ↓
+|  taskProcessor (field private com.wind.middleware.service.TaskService com.wind.middleware.queue.TaskProcessor.taskService)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-09-14 19:19:58.912 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Starting MiddlewareAnalyzeApplication using Java 17 with PID 92769 (/Users/hqhe/IdeaProjects/middle-ware-analyze/target/classes started by hqhe in /Users/hqhe/IdeaProjects/middle-ware-analyze)
+2025-09-14 19:19:58.913 [main] DEBUG c.w.m.MiddlewareAnalyzeApplication - Running with Spring Boot v3.3.6, Spring v6.1.15
+2025-09-14 19:19:58.913 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - The following 1 profile is active: "dev"
+2025-09-14 19:19:59.277 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-14 19:19:59.281 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-14 19:19:59.281 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-09-14 19:19:59.298 [main] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring embedded WebApplicationContext
+2025-09-14 19:19:59.299 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 372 ms
+2025-09-14 19:19:59.438 [main] INFO  c.w.m.config.TaskQueueConfig - 任务队列初始化完成，容量: 1000
+2025-09-14 19:19:59.438 [main] INFO  c.w.m.config.TaskQueueConfig - 任务处理线程池初始化完成
+2025-09-14 19:19:59.537 [main] INFO  c.w.m.config.ElasticsearchConfig - Elasticsearch客户端配置完成，连接地址: localhost:9200
+2025-09-14 19:19:59.566 [main] INFO  c.w.m.config.HttpClientConfig - HTTP客户端配置完成，连接超时: 3000ms, 读取超时: 5000ms
+2025-09-14 19:19:59.568 [main] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器启动
+2025-09-14 19:19:59.568 [task-processor] INFO  c.w.m.queue.TaskQueueManager - 任务消费线程启动
+2025-09-14 19:19:59.688 [main] INFO  c.b.m.e.s.MybatisPlusApplicationContextAware - Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@696f0212
+2025-09-14 19:19:59.738 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-09-14 19:19:59.741 [main] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器开始停止
+2025-09-14 19:19:59.742 [main] INFO  c.w.m.queue.TaskQueueManager - 任务执行器已关闭
+2025-09-14 19:19:59.742 [main] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器停止完成
+2025-09-14 19:19:59.749 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-14 19:19:59.755 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-09-14 19:20:29.056 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Starting MiddlewareAnalyzeApplication using Java 17 with PID 92839 (/Users/hqhe/IdeaProjects/middle-ware-analyze/target/classes started by hqhe in /Users/hqhe/IdeaProjects/middle-ware-analyze)
+2025-09-14 19:20:29.056 [main] DEBUG c.w.m.MiddlewareAnalyzeApplication - Running with Spring Boot v3.3.6, Spring v6.1.15
+2025-09-14 19:20:29.057 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - The following 1 profile is active: "dev"
+2025-09-14 19:20:29.416 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-14 19:20:29.420 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-14 19:20:29.420 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-09-14 19:20:29.436 [main] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring embedded WebApplicationContext
+2025-09-14 19:20:29.436 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 365 ms
+2025-09-14 19:20:29.569 [main] INFO  c.w.m.config.TaskQueueConfig - 任务队列初始化完成，容量: 1000
+2025-09-14 19:20:29.569 [main] INFO  c.w.m.config.TaskQueueConfig - 任务处理线程池初始化完成
+2025-09-14 19:20:29.657 [main] INFO  c.w.m.config.ElasticsearchConfig - Elasticsearch客户端配置完成，连接地址: localhost:9200
+2025-09-14 19:20:29.691 [main] INFO  c.w.m.config.HttpClientConfig - HTTP客户端配置完成，连接超时: 3000ms, 读取超时: 5000ms
+2025-09-14 19:20:29.693 [main] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器启动
+2025-09-14 19:20:29.694 [task-processor] INFO  c.w.m.queue.TaskQueueManager - 任务消费线程启动
+2025-09-14 19:20:29.812 [main] INFO  c.b.m.e.s.MybatisPlusApplicationContextAware - Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@c5ee75e
+2025-09-14 19:20:29.856 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/middleware-analyze'
+2025-09-14 19:20:29.859 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Started MiddlewareAnalyzeApplication in 0.955 seconds (process running for 1.165)
+2025-09-14 19:20:32.257 [SpringApplicationShutdownHook] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器开始停止
+2025-09-14 19:20:32.257 [SpringApplicationShutdownHook] INFO  c.w.m.queue.TaskQueueManager - 任务执行器已关闭
+2025-09-14 19:20:32.257 [SpringApplicationShutdownHook] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器停止完成
+2025-09-14 19:38:51.276 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Starting MiddlewareAnalyzeApplication using Java 24.0.2 with PID 93782 (/Users/hqhe/IdeaProjects/middle-ware-analyze/target/classes started by hqhe in /Users/hqhe/IdeaProjects/middle-ware-analyze)
+2025-09-14 19:38:51.276 [main] DEBUG c.w.m.MiddlewareAnalyzeApplication - Running with Spring Boot v3.3.6, Spring v6.1.15
+2025-09-14 19:38:51.277 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - The following 1 profile is active: "dev"
+2025-09-14 19:38:51.645 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-14 19:38:51.651 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-14 19:38:51.651 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-09-14 19:38:51.671 [main] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring embedded WebApplicationContext
+2025-09-14 19:38:51.671 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 371 ms
+2025-09-14 19:38:51.807 [main] INFO  c.w.m.config.TaskQueueConfig - 任务队列初始化完成，容量: 1000
+2025-09-14 19:38:51.808 [main] INFO  c.w.m.config.TaskQueueConfig - 任务处理线程池初始化完成
+2025-09-14 19:38:51.889 [main] INFO  c.w.m.config.ElasticsearchConfig - Elasticsearch客户端配置完成，连接地址: localhost:9200
+2025-09-14 19:38:51.914 [main] INFO  c.w.m.config.HttpClientConfig - HTTP客户端配置完成，连接超时: 3000ms, 读取超时: 5000ms
+2025-09-14 19:38:51.916 [main] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器启动
+2025-09-14 19:38:51.916 [task-processor] INFO  c.w.m.queue.TaskQueueManager - 任务消费线程启动
+2025-09-14 19:38:52.026 [main] INFO  c.b.m.e.s.MybatisPlusApplicationContextAware - Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6bc407fd
+2025-09-14 19:38:52.068 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/middleware-analyze'
+2025-09-14 19:38:52.071 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Started MiddlewareAnalyzeApplication in 0.943 seconds (process running for 1.04)
+2025-09-14 19:39:56.407 [http-nio-8080-exec-9] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-14 19:39:56.409 [http-nio-8080-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-14 19:39:56.412 [http-nio-8080-exec-9] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-09-14 19:39:56.721 [http-nio-8080-exec-7] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 186 ms
+2025-09-14 19:42:54.633 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Starting MiddlewareAnalyzeApplication using Java 17 with PID 94781 (/Users/hqhe/IdeaProjects/middle-ware-analyze/target/classes started by hqhe in /Users/hqhe/IdeaProjects/middle-ware-analyze)
+2025-09-14 19:42:54.634 [main] DEBUG c.w.m.MiddlewareAnalyzeApplication - Running with Spring Boot v3.3.6, Spring v6.1.15
+2025-09-14 19:42:54.635 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - The following 1 profile is active: "dev"
+2025-09-14 19:42:54.983 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-09-14 19:42:54.987 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-14 19:42:54.987 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-09-14 19:42:55.004 [main] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring embedded WebApplicationContext
+2025-09-14 19:42:55.005 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 355 ms
+2025-09-14 19:42:55.132 [main] INFO  c.w.m.config.TaskQueueConfig - 任务队列初始化完成，容量: 1000
+2025-09-14 19:42:55.133 [main] INFO  c.w.m.config.TaskQueueConfig - 任务处理线程池初始化完成
+2025-09-14 19:42:55.219 [main] INFO  c.w.m.config.ElasticsearchConfig - Elasticsearch客户端配置完成，连接地址: localhost:9200
+2025-09-14 19:42:55.244 [main] INFO  c.w.m.config.HttpClientConfig - HTTP客户端配置完成，连接超时: 3000ms, 读取超时: 5000ms
+2025-09-14 19:42:55.246 [main] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器启动
+2025-09-14 19:42:55.246 [task-processor] INFO  c.w.m.queue.TaskQueueManager - 任务消费线程启动
+2025-09-14 19:42:55.362 [main] INFO  c.b.m.e.s.MybatisPlusApplicationContextAware - Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@c5ee75e
+2025-09-14 19:42:55.403 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/middleware-analyze'
+2025-09-14 19:42:55.407 [main] INFO  c.w.m.MiddlewareAnalyzeApplication - Started MiddlewareAnalyzeApplication in 0.914 seconds (process running for 1.13)
+2025-09-14 19:42:57.117 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/middleware-analyze] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-14 19:42:57.117 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-14 19:42:57.118 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-14 19:42:57.351 [http-nio-8080-exec-4] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 161 ms
+2025-09-14 19:43:33.227 [SpringApplicationShutdownHook] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器开始停止
+2025-09-14 19:43:33.227 [SpringApplicationShutdownHook] INFO  c.w.m.queue.TaskQueueManager - 任务执行器已关闭
+2025-09-14 19:43:33.227 [SpringApplicationShutdownHook] INFO  c.w.m.queue.TaskQueueManager - 任务队列管理器停止完成

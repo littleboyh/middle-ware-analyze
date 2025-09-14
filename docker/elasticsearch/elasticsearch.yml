@@ -1,0 +1,35 @@
+# Elasticsearch 6.1.2 配置文件
+
+# 集群配置
+cluster.name: middleware-es-cluster
+node.name: middleware-es-node
+
+# 网络配置
+network.host: 0.0.0.0
+http.port: 9200
+transport.tcp.port: 9300
+
+# 发现配置
+discovery.type: single-node
+
+# 内存锁定
+bootstrap.memory_lock: true
+
+# 数据和日志路径
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# 跨域配置
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: "X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization"
+http.cors.allow-credentials: true
+
+# 安全配置（6.x版本）
+xpack.security.enabled: false
+xpack.monitoring.enabled: false
+xpack.graph.enabled: false
+xpack.watcher.enabled: false
+
+# 索引模板配置（将通过API设置）
+# 默认分片和副本数将通过索引模板管理
